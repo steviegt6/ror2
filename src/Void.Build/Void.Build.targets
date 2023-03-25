@@ -1,0 +1,11 @@
+<Project>
+
+    <Import Project="Void.Build.GamePath.targets"/>
+    <Import Project="Void.Build.GameReferences.targets"/>
+
+    <PropertyGroup>
+        <DebugSymbols>true</DebugSymbols>
+        <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    </PropertyGroup>
+
+</Project>

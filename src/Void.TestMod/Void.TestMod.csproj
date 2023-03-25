@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="../Void.Build/Void.Build.targets"/>
+
+    <PropertyGroup>
+        <TargetFramework>net452</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+</Project>

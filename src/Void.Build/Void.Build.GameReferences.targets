@@ -1,0 +1,20 @@
+<Project>
+
+    <!-- Run before assembly references are resolved in order to guarantee that
+         our assemblies we want to reference are added first. -->
+    <Target Name="AddAssemblies" BeforeTargets="ResolveAssemblyReferences">
+        <PropertyGroup>
+            <ManagedPath>$(GamePath)/Risk of Rain 2_Data/Managed</ManagedPath>
+        </PropertyGroup>
+        <ItemGroup>
+            <!-- Gather all assemblies within the Managed assembly folder. -->
+            <!-- We'll exclude stdlib DLLs that we already have. -->
+            <ReferencedAssemblies Include="$(ManagedPath)/*.dll"
+                                  Exclude="$(ManagedPath)/System.dll;$(ManagedPath)/System.Core.dll;$(ManagedPath)/System.Xml.dll;$(ManagedPath)/System.Xml.Linq.dll;$(ManagedPath)/System.Runtime.Serialization.dll"/>
+
+            <!-- Add our gathered references. -->
+            <Reference Include="@(ReferencedAssemblies)" Private="false"/>
+        </ItemGroup>
+    </Target>
+
+</Project>

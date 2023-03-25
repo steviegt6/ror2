@@ -1,0 +1,54 @@
+<!--
+Logic taken and adpted from:
+https://github.com/Pathoschild/SMAPI/blob/develop/build/find-game-folder.targets
+-->
+<Project>
+
+    <!-- Firstly define GamePath as the high-proprity environment variable. -->
+    <PropertyGroup>
+        <!-- Set GamePath to the custom VOID_ROR2_GAME_PATH environment variable
+             if has been defined. This is for people using non-standard game
+             paths or cases in which the auto-detection fails and needs to be
+             updated. -->
+        <GamePath Condition=" '$(VOID_ROR2_GAME_PATH)' != '' ">
+            $(VOID_ROR2_GAME_PATH)
+        </GamePath>
+    </PropertyGroup>
+
+    <!-- Then, if not present, define GamePath based on a variaty of
+         auto-detectable paths. -->
+    <Choose>
+        <!-- Linux and macOS -->
+        <When Condition="$(OS) == 'Unix' OR $(OS) == 'OSX'">
+            <PropertyGroup>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.steam/steam/steamapps/common/Risk of Rain 2</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.local/share/Steam/steamapps/common/Risk of Rain 2</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common/Risk of Rain 2</GamePath>
+
+                <GamePath Condition="!Exists('$(GamePath)')">/Applications/Risk of Rain 2.app/Contents/MacOS</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">$(HOME)/Library/Application Support/Steam/steamapps/common/Risk of Rain 2/Contents/MacOS</GamePath>
+            </PropertyGroup>
+        </When>
+
+        <!-- Windows -->
+        <When Condition="$(OS) == 'Windows_NT'">
+            <PropertyGroup>
+                <GamePath Condition="!Exists('$(GamePath)')">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 632360', 'InstallLocation', null, RegistryView.Registry64, RegistryView.Registry32))</GamePath>
+
+                <!-- derive from Steam library path -->
+                <_SteamLibraryPath>$([MSBuild]::GetRegistryValueFromView('HKEY_CURRENT_USER\SOFTWARE\Valve\Steam', 'SteamPath', null, RegistryView.Registry32))</_SteamLibraryPath>
+                <GamePath Condition="!Exists('$(GamePath)') AND '$(_SteamLibraryPath)' != ''">$(_SteamLibraryPath)\steamapps\common\Risk of Rain 2</GamePath>
+
+                <GamePath Condition="!Exists('$(GamePath)')">C:\Program Files\Steam\steamapps\common\Risk of Rain 2</GamePath>
+                <GamePath Condition="!Exists('$(GamePath)')">C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2</GamePath>
+            </PropertyGroup>
+        </When>
+    </Choose>
+
+    <!-- TODO: Cross-OS support. -->
+    <!-- Defines GameRunPath for actually launching the game. -->
+    <PropertyGroup>
+        <GameRunPath>$(GamePath)/Risk of Rain 2.exe</GameRunPath>
+    </PropertyGroup>
+
+</Project>
