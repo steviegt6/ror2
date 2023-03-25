@@ -20,18 +20,28 @@
            VOID_ROR2_GAME_PATH: Determines the game path to use, overrides
                                 what the default, resolved path would be. See
                                 Void.Build.GameReferences.Targets for more.
-                                Default: environment variable, N/A.
+                                Default: environment variable, N/A
 
            VoidImportReferences: 'enable' to allow Void.Build to import
                                  local assembly references, otherwise false.
-                                 Default: 'enable'. -->
+                                 Default: 'enable'
+                                 Values: 'enable', 'disable'
+
+           VoidGameRunner: 'enable' sets StartAction, StartProgram, and 
+                           StartWorkingDirectory accordingly to start the game.
+                           Currently only supported on Windows, you should
+                           contribute!
+                           Default: 'enable'
+                           Values: 'enable', 'disable' -->
 
     <PropertyGroup>
         <VoidImportReferences Condition=" '$(VoidImportReferences)' == '' ">enable</VoidImportReferences>
+        <VoidGameRunner Condition=" '$(VoidGameRunner)' == '' ">enable</VoidGameRunner>
     </PropertyGroup>
 
     <Import Project="Void.Build.GamePath.targets"/>
     <Import Project="Void.Build.GameReferences.targets"/>
+    <Import Project="Void.Build.GameRunner.targets"/>
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
