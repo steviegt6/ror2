@@ -17,3 +17,6 @@ convenient and consistent way to build mods.
 - Automatic dependency resolution.
   - Void.Build can automatically detect game installations and reference the
     applicable assemblies as necessary.
+  - This handles boilerplate referencing, and does not pull from the BepinEx
+    NuGet repository. Unfortunately, these assemblies do not come with
+    publicized members. This is a TODO.

@@ -14,7 +14,7 @@
 -->
 
 <Project>
-    
+
     <!-- There are various configuration options you can use, both as properties
          in MSBuild and environment variables. They are as follows:
            VOID_ROR2_GAME_PATH: Determines the game path to use, overrides
@@ -25,7 +25,7 @@
            VoidImportReferences: 'enable' to allow Void.Build to import
                                  local assembly references, otherwise false.
                                  Default: 'enable'. -->
-    
+
     <PropertyGroup>
         <VoidImportReferences Condition=" '$(VoidImportReferences)' == '' ">enable</VoidImportReferences>
     </PropertyGroup>
@@ -34,6 +34,7 @@
     <Import Project="Void.Build.GameReferences.targets"/>
 
     <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <DebugSymbols>true</DebugSymbols>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     </PropertyGroup>

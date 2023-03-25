@@ -3,7 +3,6 @@
     <Import Project="../Void.Build/Void.Build.targets"/>
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
