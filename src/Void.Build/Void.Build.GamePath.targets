@@ -1,6 +1,24 @@
 <!--
-Logic taken and adpted from:
-https://github.com/Pathoschild/SMAPI/blob/develop/build/find-game-folder.targets
+    Copyright (C) 2023 Tomat & Contributors
+    Copyright (C) 2023 Pathoschild & SMAPI Contributors
+    
+    Licensed under the GNU General Public License, version 3; you may not use
+    this file except in compliance with the License.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+    more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!--
+    Logic taken and adpted from in accordance to the GNU LGPL, version 3 (SMAPI's
+    ModBuildConfig is licensed under MIT, but this file lies within a separate
+    folder assumed subject to GNU LGPL, version 3):
+    https://github.com/Pathoschild/SMAPI/blob/develop/build/find-game-folder.targets
 -->
 <Project>
 
