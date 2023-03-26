@@ -23,9 +23,9 @@
         </PropertyGroup>
         <ItemGroup>
             <!-- Gather all assemblies within the Managed assembly folder. -->
-            <!-- We'll exclude stdlib DLLs that we already have. -->
+            <!-- We'll exclude core stdlib DLLs that we already have. -->
             <ReferencedAssemblies Include="$(ManagedPath)/*.dll"
-                                  Exclude="$(ManagedPath)/System.dll;$(ManagedPath)/System.Core.dll;$(ManagedPath)/System.Xml.dll;$(ManagedPath)/System.Xml.Linq.dll;$(ManagedPath)/System.Runtime.Serialization.dll"/>
+                                  Exclude="$(ManagedPath)/System.dll;$(ManagedPath)/System.Core.dll"/>
 
             <!-- Add our gathered references. -->
             <Reference Condition="$(VoidImportReferences) == 'enable'" Include="@(ReferencedAssemblies)" Private="false"/>

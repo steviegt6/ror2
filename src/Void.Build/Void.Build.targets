@@ -83,6 +83,10 @@
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
         
         <OutDir>$(ModAssemblyDirectory)</OutDir>
+
+        <!-- Unforatuntely, we have to just ignore MSB3243 (No way to resolve
+             conflict between 'X' and 'Y'.) Sucks. -->
+        <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3243</MSBuildWarningsAsMessages>
     </PropertyGroup>
 
 </Project>
