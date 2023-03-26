@@ -32,7 +32,32 @@
                            Currently only supported on Windows, you should
                            contribute!
                            Default: 'enable'
-                           Values: 'enable', 'disable' -->
+                           Values: 'enable', 'disable'
+
+           VoidBepInExProjectType: 'plugin' or 'patcher', determines the install
+                                   directory for a BepInEx plugin. Impacts what
+                                   directory the mod is built to.
+                                   Default: 'plugin'
+                                   Values: 'plugin', 'patcher'
+
+           VOID_ROR2_MOD_MANAGER: Environment variable that overrides the
+                                  VoidModManager property. See below for more.
+                                  Default: environment variable, N/A
+
+           VoidModManager: The mod manager to use, determines what output path
+                           should be used. 'none' for no manager, 'r2modman' for
+                           r2modman. TODO: Support other managers.
+                           Default: 'none'
+                           Values: 'none', 'r2modman'
+
+           VOID_ROR2_MOD_MANAGER_PROFILE: Environment variable that overrides
+                                  the VoidModManagerProfile property. See below
+                                  for more.
+                                  Default: environment variable, N/A
+
+           VoidModManagerProfile: The mod manager profile to use, if applicable.
+                                  Default: ''
+                                  Values: any -->
 
     <PropertyGroup>
         <VoidImportReferences Condition=" '$(VoidImportReferences)' == '' ">enable</VoidImportReferences>
