@@ -71,9 +71,9 @@
     </PropertyGroup>
 
     <Import Project="Void.Build.GamePath.targets"/>
+    <Import Project="Void.Build.ModManagerPaths.targets"/>
     <Import Project="Void.Build.GameReferences.targets"/>
     <Import Project="Void.Build.GameRunner.targets"/>
-    <Import Project="Void.Build.ModManagerPaths.targets"/>
     <Import Project="Void.Build.OutputDeterminer.targets"/>
     <Import Project="Void.Build.ErrorChecker.targets"/>
 
