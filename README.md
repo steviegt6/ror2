@@ -32,5 +32,6 @@ convenient and consistent way to build mods.
   - Convenient support for running a Mono debug server that your IDE can listen
     to.
   - Auto-detected game paths allow for quickly setting this up.
+- Easily include NuGet packages, project references, and assembly references.
 - Error detection for invalid paths and `.csproj` properties.
   - Mostly just convenience...
