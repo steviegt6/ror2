@@ -66,6 +66,7 @@
     <PropertyGroup>
         <VoidImportReferences Condition="$(VoidImportReferences) == ''">enable</VoidImportReferences>
         <VoidGameRunner Condition="$(VoidGameRunner) == ''">enable</VoidGameRunner>
+        <VoidModManager Condition="$(VoidModManager) == ''">none</VoidModManager>
         <VoidBepInExProjectType Condition="$(VoidBepInExProjectType) == ''">plugin</VoidBepInExProjectType>
     </PropertyGroup>
 
@@ -74,6 +75,7 @@
     <Import Project="Void.Build.GameRunner.targets"/>
     <Import Project="Void.Build.ModManagerPaths.targets"/>
     <Import Project="Void.Build.OutputDeterminer.targets"/>
+    <Import Project="Void.Build.ErrorChecker.targets"/>
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>

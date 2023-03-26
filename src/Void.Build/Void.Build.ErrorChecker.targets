@@ -1,0 +1,31 @@
+<!--
+    Copyright (C) 2023 Tomat & Contributors
+    Copyright (C) 2023 Pathoschild & SMAPI Contributors
+    
+    Licensed under the GNU General Public License, version 3; you may not use
+    this file except in compliance with the License.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+    more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<Project>
+
+    <Target Name="DisplayErrors" BeforeTargets="Build">
+        <!-- Check for invalid configuration options. -->
+        <Error Text="Invalid option '$(VoidImportReferences)' for VoidImportReferences; must be 'enable', 'disable'" Condition="$(VoidImportReferences) != 'enable' AND $(VoidImportReferences) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidGameRunner)' for VoidGameRunner; must be 'enable', 'disable'" Condition="$(VoidGameRunner) != 'enable' AND $(VoidGameRunner) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidBepInExProjectType)' for VoidBepInExProjectType; must be 'plugin', 'patcher'" Condition="$(VoidBepInExProjectType) != 'plugin' AND $(VoidGameRunner) != 'patcher'"/>
+        <Error Text="Invalid option '$(VoidModManager)' for VoidModManager; must be 'none', 'r2modman'" Condition="$(VoidModManager) != 'none' AND $(VoidModManager) != 'r2modman'"/>
+
+        <!-- Check for invalid paths. -->
+        <Error Text="BepInExPath not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(BepInExPath) == ''"/>
+        <!--<Error Text="Invalid path '$(BepInExPath)' for BepInExPath; report this!" Condition="!Exists('$(BepInExPath)')" />-->
+    </Target>
+
+</Project>

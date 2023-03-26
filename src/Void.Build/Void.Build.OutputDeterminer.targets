@@ -15,7 +15,7 @@
 -->
 
 <Project>
-    
+
     <PropertyGroup>
         <ModOutputDirectory Condition="'$(VOID_ROR2_OUTPUT_DIRECTORY)' != ''">$(VOID_ROR2_OUTPUT_DIRECTORY)</ModOutputDirectory>
         <BepInExSubDir Condition="$(VoidBepInExProjectType) == 'plugin'">plugins</BepInExSubDir>
@@ -23,5 +23,5 @@
         <ModOutputDirectory Condition="'$(ModOutputDirectory)' == ''">$(BepInExPath)/$(BepInExSubDir)/$(AssemblyName)</ModOutputDirectory>
         <ModAssemblyDirectory Condition="'$(ModAssemblyDirectory)' == ''">$(ModOutputDirectory)/$(AssemblyName)</ModAssemblyDirectory>
     </PropertyGroup>
-    
+
 </Project>

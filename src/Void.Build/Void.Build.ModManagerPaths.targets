@@ -33,11 +33,11 @@
             </Choose>
         </When>
 
-        <Otherwise>
+        <When Condition="$(VoidModManager) == 'none'">
             <PropertyGroup>
                 <BepInExPath Condition="!Exists('$(BepInExPath)')">$(GamePath)/BepInEx</BepInExPath>
             </PropertyGroup>
-        </Otherwise>
+        </When>
     </Choose>
 
 </Project>
