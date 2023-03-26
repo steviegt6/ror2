@@ -106,6 +106,8 @@
         <!-- Unforatuntely, we have to just ignore MSB3243 (No way to resolve
              conflict between 'X' and 'Y'.) Sucks. -->
         <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3243</MSBuildWarningsAsMessages>
+
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
 
 </Project>

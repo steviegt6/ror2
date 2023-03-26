@@ -1,6 +1,7 @@
 ﻿using BepInEx;
+using Tomlyn;
 
-namespace Void.TestMod; 
+namespace Void.TestMod;
 
 [BepInPlugin(GUID, NAME, VERSION)]
 public class TestPlugin : BaseUnityPlugin {
@@ -10,5 +11,13 @@ public class TestPlugin : BaseUnityPlugin {
 
     private void Awake() {
         Logger.LogInfo("Hello, world!");
+
+        const string toml = @"
+test = ""test""
+[table]
+table_test = ""table_test""
+";
+        var model = Toml.ToModel(toml);
+        Logger.LogError(Toml.FromModel(model));
     }
 }
