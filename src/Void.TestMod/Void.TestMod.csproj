@@ -3,7 +3,7 @@
     <PropertyGroup>
         <VoidMonoDebugWait>enable</VoidMonoDebugWait>
     </PropertyGroup>
-    
+
     <Import Project="../Void.Build/Void.Build.targets" />
 
     <PropertyGroup>
