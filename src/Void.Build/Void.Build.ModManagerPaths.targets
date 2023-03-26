@@ -1,0 +1,43 @@
+<!--
+    Copyright (C) 2023 Tomat & Contributors
+    Copyright (C) 2023 Pathoschild & SMAPI Contributors
+    
+    Licensed under the GNU General Public License, version 3; you may not use
+    this file except in compliance with the License.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+    more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<Project>
+
+    <PropertyGroup>
+        <VoidModManager Condition="$(VOID_ROR2_MOD_MANAGER)  != ''">$(VOID_ROR2_MOD_MANAGER)</VoidModManager>
+        <VoidModManagerProfile Condition="$(VOID_ROR2_MOD_MANAGER_PROFILE)  != ''">$(VOID_ROR2_MOD_MANAGER_PROFILE)</VoidModManagerProfile>
+    </PropertyGroup>
+
+    <!-- TODO: Support more OSes and mod managers, just need paths. Please! -->
+    <Choose>
+        <When Condition="$(VoidModManager) == 'r2modman'">
+            <Choose>
+                <When Condition="$(OS) == 'Windows_NT'">
+                    <PropertyGroup>
+                        <BepInExPath Condition="!Exists('$(BepInExPath)')">$([System.Environment]::GetFolderPath(SpecialFolder.ApplicationData))/r2modmanPlus-local/RiskOfRain2/profiles/$(VoidModManagerProfile)/BepInEx</BepInExPath>
+                    </PropertyGroup>
+                </When>
+            </Choose>
+        </When>
+
+        <Otherwise>
+            <PropertyGroup>
+                <BepInExPath Condition="!Exists('$(BepInExPath)')">$(GamePath)/BepInEx</BepInExPath>
+            </PropertyGroup>
+        </Otherwise>
+    </Choose>
+
+</Project>

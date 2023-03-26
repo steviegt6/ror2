@@ -1,6 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="../Void.Build/Void.Build.targets"/>
+    <PropertyGroup>
+        <VoidModManager>r2modman</VoidModManager>
+        <VoidModManagerProfile>dev</VoidModManagerProfile>
+        <VoidBepInExProjectType>plugin</VoidBepInExProjectType>
+    </PropertyGroup>
+    
+    <Import Project="../Void.Build/Void.Build.targets" />
 
     <PropertyGroup>
         <LangVersion>latest</LangVersion>

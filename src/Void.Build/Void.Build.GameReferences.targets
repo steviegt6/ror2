@@ -28,7 +28,7 @@
                                   Exclude="$(ManagedPath)/System.dll;$(ManagedPath)/System.Core.dll;$(ManagedPath)/System.Xml.dll;$(ManagedPath)/System.Xml.Linq.dll;$(ManagedPath)/System.Runtime.Serialization.dll"/>
 
             <!-- Add our gathered references. -->
-            <Reference Condition=" '$(VoidImportReferences)' == 'enable' " Include="@(ReferencedAssemblies)" Private="false"/>
+            <Reference Condition="$(VoidImportReferences) == 'enable'" Include="@(ReferencedAssemblies)" Private="false"/>
         </ItemGroup>
     </Target>
 

@@ -15,9 +15,9 @@
 -->
 
 <!--
-    Logic taken and adpted from in accordance to the GNU LGPL, version 3 (SMAPI's
-    ModBuildConfig is licensed under MIT, but this file lies within a separate
-    folder assumed subject to GNU LGPL, version 3):
+    Logic taken and adpted from in accordance to the GNU LGPL, version 3
+    (SMAPI's ModBuildConfig is licensed under MIT, but this file lies within a
+    separate folder assumed subject to GNU LGPL, version 3):
     https://github.com/Pathoschild/SMAPI/blob/develop/build/find-game-folder.targets
 -->
 <Project>
@@ -28,7 +28,7 @@
              if has been defined. This is for people using non-standard game
              paths or cases in which the auto-detection fails and needs to be
              updated. -->
-        <GamePath Condition=" '$(VOID_ROR2_GAME_PATH)' != '' ">
+        <GamePath Condition="$(VOID_ROR2_GAME_PATH) != ''">
             $(VOID_ROR2_GAME_PATH)
         </GamePath>
     </PropertyGroup>
