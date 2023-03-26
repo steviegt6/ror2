@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+        "Risk of Rain 2 (Client)": {
+            "commandName": "Executable",
+            "executablePath": "$(GameRunPath)",
+            "commandLineArgs": "$(DoorstopArguments)",
+            "workingDirectory": "$(GamePath)"
+        }
+    }
+}

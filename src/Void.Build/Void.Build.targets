@@ -61,13 +61,32 @@
                                   
            VOID_ROR2_OUTPUT_DIRECTORY: Environment variable that overrides the
                                        calculated output path for building.
-                                       Default: environment variable, N/A -->
+                                       Default: environment variable, N/A
+
+           VoidMonoDebug: Determines whether UnityDoorstop should launch the
+                          Mono debug server.
+                          Default: 'disable', overruled if the current
+                                   configuration is "Debug"
+                          Values: 'enable', 'disable'
+
+           VoidMonoDebugPort: The port to use for the Mono debug server.
+                              Default: 10000
+                              Values: any
+
+           VoidMonoDebugWait: Determines whether UnityDoorstop should wait for
+                              the Mono debug server to start before launching
+                              the game.
+                              Default: 'disable'
+                              Values: 'enable', 'disable' -->
 
     <PropertyGroup>
         <VoidImportReferences Condition="$(VoidImportReferences) == ''">enable</VoidImportReferences>
         <VoidGameRunner Condition="$(VoidGameRunner) == ''">enable</VoidGameRunner>
         <VoidModManager Condition="$(VoidModManager) == ''">none</VoidModManager>
         <VoidBepInExProjectType Condition="$(VoidBepInExProjectType) == ''">plugin</VoidBepInExProjectType>
+        <VoidMonoDebug Condition="$(VoidMonoDebug) == ''">disable</VoidMonoDebug>
+        <VoidMonoDebugPort Condition="$(VoidMonoDebugPort) == ''">10000</VoidMonoDebugPort>
+        <VoidMonoDebugWait Condition="$(VoidMonoDebugWait) == ''">disable</VoidMonoDebugWait>
     </PropertyGroup>
 
     <Import Project="Void.Build.GamePath.targets"/>
@@ -81,7 +100,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <DebugSymbols>true</DebugSymbols>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
-        
+
         <OutDir>$(ModAssemblyDirectory)</OutDir>
 
         <!-- Unforatuntely, we have to just ignore MSB3243 (No way to resolve
