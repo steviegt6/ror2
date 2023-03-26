@@ -16,15 +16,17 @@
 <Project>
 
     <PropertyGroup>
+        <!-- UnityDoorstop 4.0.0 -->
         <DoorstopMonoEnabled Condition="$(VoidMonoDebug) == 'enable'">--doorstop-mono-debug-enabled true</DoorstopMonoEnabled>
         <DoorstopMonoEnabled Condition="$(VoidMonoDebug) == 'disable'">--doorstop-mono-debug-enabled false</DoorstopMonoEnabled>
         <DoorstopMonoEnabled Condition="$(Configuration) == 'Debug'">--doorstop-mono-debug-enabled true</DoorstopMonoEnabled>
-        <DoorstopMonoPort>--doorstop-mono-debug-address "$(VoidMonoDebugPort)"</DoorstopMonoPort>
+        <DoorstopMonoPort>--doorstop-mono-debug-address 127.0.0.1:$(VoidMonoDebugPort)</DoorstopMonoPort>
         <DoorstopMonoWait Condition="$(VoidMonoDebugWait) == 'enable'">--doorstop-mono-debug-suspend true</DoorstopMonoWait>
         <DoorstopMonoWait Condition="$(VoidMonoDebugWait) == 'disable'">--doorstop-mono-debug-suspend false</DoorstopMonoWait>
+
         <DoorstopArguments>$(DoorstopMonoEnabled) $(DoorstopMonoPort) $(DoorstopMonoWait)</DoorstopArguments>
     </PropertyGroup>
-    
+
     <!-- Used to specify project properties here. Use launchSettings.json.-->
 
 </Project>
