@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Void.Build", "Void.Build", 
 		Void.Build\Void.Build.ModManagerPaths.targets = Void.Build\Void.Build.ModManagerPaths.targets
 		Void.Build\Void.Build.OutputDeterminer.targets = Void.Build\Void.Build.OutputDeterminer.targets
 		Void.Build\Void.Build.ErrorChecker.targets = Void.Build\Void.Build.ErrorChecker.targets
+		Void.Build\Void.Build.RedirectNuGet.targets = Void.Build\Void.Build.RedirectNuGet.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.TestMod", "Void.TestMod\Void.TestMod.csproj", "{C3364A12-D6F5-44B9-880B-0A9E97973AFC}"
