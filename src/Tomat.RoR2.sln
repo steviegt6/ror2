@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Void.Build", "Void.Build", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.TestMod", "Void.TestMod\Void.TestMod.csproj", "{C3364A12-D6F5-44B9-880B-0A9E97973AFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Optimizer", "Void.Optimizer\Void.Optimizer.csproj", "{E1FD7DD0-DACB-4A99-84BC-6D780746604D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{C3364A12-D6F5-44B9-880B-0A9E97973AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3364A12-D6F5-44B9-880B-0A9E97973AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3364A12-D6F5-44B9-880B-0A9E97973AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1FD7DD0-DACB-4A99-84BC-6D780746604D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1FD7DD0-DACB-4A99-84BC-6D780746604D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1FD7DD0-DACB-4A99-84BC-6D780746604D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1FD7DD0-DACB-4A99-84BC-6D780746604D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
