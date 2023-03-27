@@ -25,7 +25,7 @@
             <!-- Gather all assemblies within the Managed assembly folder. -->
             <!-- We'll exclude core stdlib DLLs that we already have. -->
             <ReferencedAssemblies Include="$(ManagedPath)/*.dll"
-                                  Exclude="$(ManagedPath)/System.dll;$(ManagedPath)/System.Core.dll"/>
+                                  Exclude="$(ManagedPath)/System.dll;$(ManagedPath)/System.Core.dll;$(ManagedPath)/netstandard.dll;$(ManagedPath)/mscorlib.dll"/>
             
             <ReferencedAssemblies Include="$(BepInExPath)/core/*.dll"/>
 
