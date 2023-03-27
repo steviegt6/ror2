@@ -31,6 +31,10 @@ public static class Patcher {
             Paths.DllSearchPaths,
             "*.dll"
         );
+        asms = asms.Where(
+            asm => !asm.EndsWith("System.dll")
+                && !asm.EndsWith("mscorlib.dll")
+        );
         return asms.Select(Path.GetFileName);
     }
 }
