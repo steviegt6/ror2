@@ -25,7 +25,8 @@ public static class Patcher {
 
     // Resolve all DLL names that BepInEx would normally support patching.
     private static IEnumerable<string> ResolveDllNames() {
-        // Not too concerned about finding unmanaged assemblies -- BepInEx just
+        // TODO: Scrapped cos BepInEx handles patching all assemblies poorly...
+        /*// Not too concerned about finding unmanaged assemblies -- BepInEx just
         // ignores our requests to patch them. Not a big deal.
         var asms = Utility.GetUniqueFilesInDirectories(
             Paths.DllSearchPaths,
@@ -35,6 +36,7 @@ public static class Patcher {
             asm => !asm.EndsWith("System.dll")
                 && !asm.EndsWith("mscorlib.dll")
         );
-        return asms.Select(Path.GetFileName);
+        return asms.Select(Path.GetFileName);*/
+        yield break;
     }
 }
