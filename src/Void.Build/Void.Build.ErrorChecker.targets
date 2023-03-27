@@ -19,7 +19,7 @@
         <!-- Check for invalid configuration options. -->
         <Error Text="Invalid option '$(VoidImportReferences)' for VoidImportReferences; must be 'enable', 'disable'" Condition="$(VoidImportReferences) != 'enable' AND $(VoidImportReferences) != 'disable'"/>
         <Error Text="Invalid option '$(VoidGameRunner)' for VoidGameRunner; must be 'enable', 'disable'" Condition="$(VoidGameRunner) != 'enable' AND $(VoidGameRunner) != 'disable'"/>
-        <Error Text="Invalid option '$(VoidBepInExProjectType)' for VoidBepInExProjectType; must be 'plugin', 'patcher'" Condition="$(VoidBepInExProjectType) != 'plugin' AND $(VoidGameRunner) != 'patcher'"/>
+        <Error Text="Invalid option '$(VoidBepInExProjectType)' for VoidBepInExProjectType; must be 'plugin', 'patcher'" Condition="$(VoidBepInExProjectType) != 'plugin' AND $(VoidBepInExProjectType) != 'patcher'"/>
         <Error Text="Invalid option '$(VoidModManager)' for VoidModManager; must be 'none', 'r2modman'" Condition="$(VoidModManager) != 'none' AND $(VoidModManager) != 'r2modman'"/>
         <Error Text="Invalid option '$(VoidMonoDebug)' for VoidMonoDebug; must be 'enable', 'disable'" Condition="$(VoidMonoDebug) != 'enable' AND $(VoidMonoDebug) != 'disable'"/>
         <Error Text="Invalid option '$(VoidMonoDebugWait)' for VoidMonoDebugWait; must be 'enable', 'disable'" Condition="$(VoidMonoDebugWait) != 'enable' AND $(VoidMonoDebugWait) != 'disable'"/>
