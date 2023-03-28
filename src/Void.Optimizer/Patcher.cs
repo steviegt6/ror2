@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using BepInEx;
+using BepInEx.Logging;
 using Mono.Cecil;
 using Void.Optimizer.Core;
 
@@ -12,15 +11,56 @@ namespace Void.Optimizer;
 // TODO: Include JetBrains.Annotations with aliases.
 // ReSharper disable once UnusedType.Global
 public static class Patcher {
+    private static readonly ManualLogSource logger =
+        Logger.CreateLogSource(typeof(Patcher).FullName);
+
+    private static readonly string[] target_dlls = ResolveDllNames().ToArray();
+
+    private static readonly List<string> patched_dlls = new();
+
     // See earlier comment.
     // ReSharper disable once UnusedMember.Global
-    public static IEnumerable<string> TargetDLLs => ResolveDllNames();
+    public static IEnumerable<string> TargetDLLs {
+        get {
+            PatchLoader.InitializePatchesForAssembly(typeof(Patcher).Assembly);
+            LogList(
+                $"Targeting {target_dlls.Length} assemblies: ",
+                target_dlls
+            );
+
+            foreach (var asm in target_dlls) {
+                logger.LogInfo("Requesting assembly for patching: " + asm);
+                yield return asm;
+            }
+        }
+    }
 
     // See earlier comment.
     // ReSharper disable once UnusedMember.Global
     public static void Patch(ref AssemblyDefinition assemblyDefinition) {
-        PatchLoader.InitializePatchersForAssembly(typeof(Patcher).Assembly);
+        var name = assemblyDefinition.Name.Name;
+        logger.LogInfo("Patching assembly: " + name);
+
         PatchLoader.PatchAssembly(ref assemblyDefinition);
+        patched_dlls.Add(name + ".dll");
+    }
+
+    // See earlier comment.
+    // ReSharper disable once UnusedMember.Global
+    public static void Finish() {
+        LogList(
+            $"Patched {patched_dlls.Count} assemblies: ",
+            target_dlls
+        );
+
+        var notPatched = target_dlls.Except(patched_dlls).ToList();
+
+        if (notPatched.Count > 0) {
+            LogList(
+                $"{notPatched.Count} assemblies were not patched: ",
+                notPatched
+            );
+        }
     }
 
     // Resolve all DLL names that BepInEx would normally support patching.
@@ -37,6 +77,16 @@ public static class Patcher {
                 && !asm.EndsWith("mscorlib.dll")
         );
         return asms.Select(Path.GetFileName);*/
-        yield break;
+        yield return "Rewired_Core.dll";
+        yield return "RoR2.dll";
+    }
+
+    private static void LogList(string msg, IReadOnlyList<string> items) {
+        var spaces = new string(' ', msg.Length);
+
+        for (var i = 0; i < items.Count; i++) {
+            var log = i == 0 ? msg : spaces;
+            logger.LogInfo(log + items[i]);
+        }
     }
 }
