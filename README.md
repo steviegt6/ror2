@@ -12,6 +12,14 @@ modding.
 Void.Build is a collection of MSBuild target files designed to facilitate a
 convenient and consistent way to build mods.
 
+### Building
+
+```bash
+git clone https://github.com/steviegt6/ror2.git
+cd ror2
+sh publish.sh
+```
+
 ### Features
 
 - Automatic dependency resolution.

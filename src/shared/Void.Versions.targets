@@ -1,0 +1,8 @@
+﻿<Project>
+    
+    <PropertyGroup>
+        <VoidBuildVersion>1.0.0</VoidBuildVersion>
+        <VoidBuildNuGetVersion>$(VoidBuildVersion)</VoidBuildNuGetVersion>
+    </PropertyGroup>
+    
+</Project>

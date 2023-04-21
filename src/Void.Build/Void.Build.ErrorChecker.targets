@@ -26,6 +26,7 @@
 
         <!-- Check for invalid paths. -->
         <Error Text="BepInExPath not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(BepInExPath) == ''"/>
+        <Error Text="ModAssemblyDirectory not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(ModAssemblyDirectory) == ''"/>
         <!--<Error Text="Invalid path '$(BepInExPath)' for BepInExPath; report this!" Condition="!Exists('$(BepInExPath)')" />-->
     </Target>
 
