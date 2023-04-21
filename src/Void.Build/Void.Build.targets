@@ -105,9 +105,7 @@
         <OutDir Condition="'$(ModAssemblyDirectory)' != '' And !HasTrailingSlash('$(ModAssemblyDirectory)')">$(ModAssemblyDirectory)/</OutDir>
         <OutDir Condition="'$(ModAssemblyDirectory)' != '' And HasTrailingSlash('$(ModAssemblyDirectory)')">$(ModAssemblyDirectory)</OutDir>
 
-        <!-- Unforatuntely, we have to just ignore MSB3243 (No way to resolve
-             conflict between 'X' and 'Y'.) Sucks. -->
-        <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3243</MSBuildWarningsAsMessages>
+        <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
