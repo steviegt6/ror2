@@ -14,6 +14,11 @@
 -->
 
 <Project>
+    
+    <PropertyGroup>
+        <AssemblyPublicizerTaskName>AssemblyPublicizerTask</AssemblyPublicizerTaskName>
+        <AssemblyPublicizerTaskAssembly>Void.Build.NuGet.AssemblyPublicizer</AssemblyPublicizerTaskAssembly>
+    </PropertyGroup>
 
     <Import Project="Void.Build.targets"/>
 

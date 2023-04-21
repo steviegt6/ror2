@@ -33,6 +33,7 @@ internal static class Program {
     private const string void_build = "Void.Build";
     private const string void_build_nuget = "Void.Build.NuGet";
     private const string void_build_nuget_shared = "Void.Build.NuGet.Shared";
+    private const string void_build_nuget_assemblypublicizer = "Void.Build.NuGet.AssemblyPublicizer";
     private const string void_build_localpublish = "Void.Build.LocalPublish";
     private const string void_optimizer = "Void.Optimizer";
 
@@ -68,6 +69,7 @@ internal static class Program {
             srcDir,
             void_build,
             void_build_nuget_shared,
+            void_build_nuget_assemblypublicizer,
             void_build_nuget
         );
 
@@ -152,7 +154,7 @@ internal static class Program {
 
     private static void DeleteNuGetCaches(string cacheDir, params string[] packages) {
         packages = packages.Select(x => x.ToLowerInvariant()).ToArray();
-        
+
         var cache = new DirectoryInfo(cacheDir);
         var pkgDirs = cache.GetDirectories().Where(x => packages.Contains(x.Name));
 

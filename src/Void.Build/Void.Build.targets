@@ -89,6 +89,7 @@
         <VoidMonoDebugWait Condition="$(VoidMonoDebugWait) == ''">disable</VoidMonoDebugWait>
     </PropertyGroup>
 
+    <Import Project="Void.Build.Tasks.targets"/>
     <Import Project="Void.Build.GamePath.targets"/>
     <Import Project="Void.Build.ModManagerPaths.targets"/>
     <Import Project="Void.Build.GameReferences.targets"/>

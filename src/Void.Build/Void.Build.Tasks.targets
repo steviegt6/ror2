@@ -1,4 +1,4 @@
-<!--
+﻿<!--
     Copyright (C) 2023 Tomat & Contributors
     
     Licensed under the GNU Lesser General Public License, version 2.1; you may
@@ -13,18 +13,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <Nullable>enable</Nullable>
-
-        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Void.Build.NuGet.Shared\Void.Build.NuGet.Shared.csproj"/>
-    </ItemGroup>
+    <UsingTask TaskName="$(AssemblyPublicizerTaskName)" AssemblyFile="$(AssemblyPublicizerTaskAssembly)" Condition="$(AssemblyPublicizerTaskname) != '' AND $(AssemblyPublicizerTaskAssembly) != ''"/>
 
 </Project>

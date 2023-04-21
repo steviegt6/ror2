@@ -54,7 +54,27 @@
         <None PackagePath="build/" Include="../Void.Build/*" Link="build/*" Pack="true"/>
 
         <!-- Include our entrypoint so we can import Void.Build -->
-        <None PackagePath="build/" Include="build\Tomat.Void.Build.NuGet.targets" Pack="true"/>
+        <None PackagePath="build/" Include="build/Tomat.Void.Build.NuGet.targets" Pack="true"/>
+
+        <!-- Include our .deps.json file for good measure. -->
+        <None PackagePath="build/" Include="$(OutputPath)/Void.Build.NuGet.deps.json" Pack="true" Visible="false"/>
+
+        <!-- Include .dll and .pdb files from the Void.Build.NuGet.Shared project. -->
+        <SharedFiles Include="../Void.Build.NuGet.Shared/bin/$(Configuration)/$(TargetFramework)/*.dll"/>
+        <SharedFiles Include="../Void.Build.NuGet.Shared/bin/$(Configuration)/$(TargetFramework)/*.pdb"/>
+
+        <!-- Include .dll and .pdb files from the Void.Build.NuGet.AssemblyPublicizer project. -->
+        <AssemblyPublicizerFiles Include="../Void.Build.NuGet.AssemblyPublicizer/bin/$(Configuration)/$(TargetFramework)/*.dll"/>
+        <AssemblyPublicizerFiles Include="../Void.Build.NuGet.AssemblyPublicizer/bin/$(Configuration)/$(TargetFramework)/*.pdb"/>
+
+        <!-- Combine the two lists. -->
+        <AllFiles Include="@(VoidBuildNuGetSharedFiles);@(AssemblyPublicizerFiles)"/>
+
+        <!-- Filter. -->
+        <UniqueFiles Include="@(AllFiles)" Exclude="@(AllFiles->'%(Filename)%(Extension)')"/>
+
+        <!-- Add filtered DependencyFiles to the package. -->
+        <None PackagePath="build/" Include="@(UniqueFiles)" Pack="true" Visible="false"/>
     </ItemGroup>
 
     <ItemGroup>
