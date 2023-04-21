@@ -96,13 +96,13 @@ internal static class Program {
             default:
                 var files = Directory.GetFiles(cwd);
 
-                // Assume that this is the root directory if setup.sh is
+                // Assume that this is the root directory if publish.sh is
                 // present. I would also check for ./.git/, but there's no
                 // guarantee that the user would have cloned the repository
                 // instead of just downloading an archive, and there's no reason
                 // to enforce it either.
 
-                if (files.Contains("setup.sh"))
+                if (files.Contains("publish.sh"))
                     return cwd;
 
                 throw new DirectoryNotFoundException($"Directory '{cwd}' was not detected as the root directory and was not able to be traversed!");
