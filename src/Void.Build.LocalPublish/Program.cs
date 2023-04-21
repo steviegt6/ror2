@@ -32,6 +32,7 @@ internal static class Program {
     // projects
     private const string void_build = "Void.Build";
     private const string void_build_nuget = "Void.Build.NuGet";
+    private const string void_build_nuget_shared = "Void.Build.NuGet.Shared";
     private const string void_build_localpublish = "Void.Build.LocalPublish";
     private const string void_optimizer = "Void.Optimizer";
 
@@ -66,6 +67,7 @@ internal static class Program {
         BuildProjects(
             srcDir,
             void_build,
+            void_build_nuget_shared,
             void_build_nuget
         );
 

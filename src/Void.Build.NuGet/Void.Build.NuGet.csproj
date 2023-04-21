@@ -15,7 +15,7 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="../shared/Void.Versions.targets" />
+    <Import Project="../shared/Void.Versions.targets"/>
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -51,10 +51,15 @@
 
     <ItemGroup>
         <!-- Include Void.Build. -->
-        <None PackagePath="build/" Include="../Void.Build/*" Link="build/*" Pack="true" />
-        
+        <None PackagePath="build/" Include="../Void.Build/*" Link="build/*" Pack="true"/>
+
         <!-- Include our entrypoint so we can import Void.Build -->
-        <None PackagePath="build/" Include="build\Tomat.Void.Build.NuGet.targets" Pack="true" />
+        <None PackagePath="build/" Include="build\Tomat.Void.Build.NuGet.targets" Pack="true"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Void.Build.NuGet.Shared\Void.Build.NuGet.Shared.csproj" PrivateAssets="all"/>
+        <ProjectReference Include="..\Void.Build.NuGet.AssemblyPublicizer\Void.Build.NuGet.AssemblyPublicizer.csproj" PrivateAssets="all"/>
     </ItemGroup>
 
 </Project>
