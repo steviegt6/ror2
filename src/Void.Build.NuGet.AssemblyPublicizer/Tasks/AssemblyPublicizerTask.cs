@@ -12,7 +12,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using Void.Build.NuGet.Shared.Tasks;
+using Void.Build.NuGet.Shared;
 
 namespace Void.Build.NuGet.AssemblyPublicizer.Tasks;
 

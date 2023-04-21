@@ -15,7 +15,7 @@
 using System;
 using Microsoft.Build.Utilities;
 
-namespace Void.Build.NuGet.Shared.Tasks;
+namespace Void.Build.NuGet.Shared;
 
 public sealed class VoidContext {
     public bool CatchOnException { get; set; } = true;
