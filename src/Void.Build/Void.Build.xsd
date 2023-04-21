@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="Microsoft.Build.Core.xsd"/>
+    
+    <xs:element name="VoidImportReferences" substitutionGroup="msb:Property">
+        <xs:annotation>
+            <xs:documentation>
+                Test documentation.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="enable"/>
+                <xs:enumeration value="disable"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+</xs:schema>
