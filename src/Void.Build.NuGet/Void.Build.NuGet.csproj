@@ -1,7 +1,45 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="../shared/Void.Versions.targets" />
+
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>Void.Build</RootNamespace>
+
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <Version>$(VoidBuildNuGetVersion)</Version>
+        <AssemblyVersion>$(Version)</AssemblyVersion>
+        <PackageVersion>$(Version)</PackageVersion>
+
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     </PropertyGroup>
+
+    <PropertyGroup Label="NuGet Properties">
+        <PackageId>Tomat.Void.Build.NuGet</PackageId>
+        <Title>Void.Build.NuGet - NuGet &amp; MSBuild Support</Title>
+        <Description>NuGet intergration and MSBuild tasks.</Description>
+        <Authors>Tomat</Authors>
+
+        <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/steviegt6/ror2</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>Git</RepositoryType>
+        <RepositoryUrl>https://github.com/steviegt6/ror2</RepositoryUrl>
+
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Include Void.Build. -->
+        <None PackagePath="build/" Include="../Void.Build/*" Link="build/*" Pack="true" />
+        
+        <!-- Include our entrypoint so we can import Void.Build -->
+        <None PackagePath="build/" Include="build\Tomat.Void.Build.NuGet.targets" Pack="true" />
+    </ItemGroup>
 
 </Project>

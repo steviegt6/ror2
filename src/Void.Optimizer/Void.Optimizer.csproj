@@ -1,15 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+
         <VoidBepInExProjectType>patcher</VoidBepInExProjectType>
         <VoidMonoDebugWait>enable</VoidMonoDebugWait>
     </PropertyGroup>
 
-    <Import Project="../Void.Build/Void.Build.targets" />
+    <Import Project="../shared/Void.Versions.targets"/>
 
-    <PropertyGroup>
-        <LangVersion>latest</LangVersion>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Tomat.Void.Build.NuGet" Version="$(VoidBuildNuGetVersion)"/>
+    </ItemGroup>
 
 </Project>

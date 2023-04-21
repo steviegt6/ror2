@@ -8,7 +8,7 @@ namespace Void.Build.LocalPublish;
 
 internal static class Program {
     // constants
-    private const string src = "src;";
+    private const string src = "src";
     private const string csproj = ".csproj";
 
     // settings
@@ -31,13 +31,17 @@ internal static class Program {
         // where this project is run from. Useful for both running from the
         // publish.sh script and running from the IDE.
         var cwd = NormalizeWorkingDirectory(Directory.GetCurrentDirectory());
-        var srcDir = Path.Combine(cwd, src, void_build_nuget);
+        var srcDir = Path.Combine(cwd, src);
+
+        Console.WriteLine("cwd: " + cwd);
+        Console.WriteLine("srcDir: " + srcDir);
 
         FindOrCreateLocalNuGetRepository(cwd);
 
         var nugetCache = GetNuGetCache();
         DeleteNuGetCaches(
-            void_build_nuget
+            nugetCache,
+            "Tomat." + void_build_nuget
         );
 
         DeletePackages(
@@ -131,18 +135,25 @@ internal static class Program {
     }
 
     private static void DeleteNuGetCaches(string cacheDir, params string[] packages) {
+        packages = packages.Select(x => x.ToLowerInvariant()).ToArray();
+        
         var cache = new DirectoryInfo(cacheDir);
         var pkgDirs = cache.GetDirectories().Where(x => packages.Contains(x.Name));
 
-        foreach (var pkgDir in pkgDirs)
+        foreach (var pkgDir in pkgDirs) {
+            Console.WriteLine($"Deleting '{pkgDir.FullName}'...");
             pkgDir.Delete(true);
+        }
     }
 
     private static void DeletePackages(string srcDir, params string[] projectNames) {
         foreach (var projectName in projectNames) {
             var dir = new DirectoryInfo(Path.Combine(srcDir, projectName));
-            foreach (var nupkg in dir.GetFiles("*.nupkg", SearchOption.AllDirectories))
+
+            foreach (var nupkg in dir.GetFiles("*.nupkg", SearchOption.AllDirectories)) {
+                Console.WriteLine($"Deleting '{nupkg.FullName}'...");
                 nupkg.Delete();
+            }
         }
     }
 
@@ -163,10 +174,17 @@ internal static class Program {
     private static void FindOrCreateLocalNuGetRepository(string cwd) {
         var settings = Settings.LoadDefaultSettings(null);
         var sourceProvider = new PackageSourceProvider(settings);
-        var source = sourceProvider.GetPackageSourceBySource(nuget_repository);
+        var nugetRepo = sourceProvider.LoadPackageSources().FirstOrDefault(x => x.Name == nuget_repository);
 
-        if (source is null) {
+        if (nugetRepo is null) {
             Console.WriteLine($"NuGet repository '{nuget_repository}' does not exist. Creating...");
+
+            var repoDir = Path.Combine(cwd, "nuget");
+            if (File.Exists(repoDir))
+                throw new DirectoryNotFoundException($"File '{repoDir}' is not a directory!");
+
+            if (!Directory.Exists(repoDir))
+                Directory.CreateDirectory(repoDir);
 
             // This is more reliable than just interfacing with the
             // NuGet.Protocol API directly. And by that, I mean I broke
@@ -174,7 +192,7 @@ internal static class Program {
             // too scared to accidentally unleash onto other people, as it
             // transcends past this project into every other project...
             // Just brilliant.
-            var addSource = new ProcessStartInfo("dotnet", $"nuget add source \"{Path.Combine(cwd, "nuget")}\" --name \"{nuget_repository}\"") {
+            var addSource = new ProcessStartInfo("dotnet", $"nuget add source \"{repoDir + "\\" + Path.DirectorySeparatorChar}\" --name \"{nuget_repository}\"") {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -182,7 +200,7 @@ internal static class Program {
             var addSourceProcess = Process.Start(addSource);
             addSourceProcess?.WaitForExit();
         }
-        else if (!source.IsEnabled) {
+        else if (!nugetRepo.IsEnabled) {
             Console.WriteLine($"NuGet repository '{nuget_repository}' exists but is not enabled. Enabling...");
             sourceProvider.EnablePackageSource(nuget_repository);
         }

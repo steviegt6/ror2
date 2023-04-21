@@ -98,11 +98,12 @@
     <Import Project="Void.Build.ErrorChecker.targets"/>
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <!--<TargetFramework>netstandard2.0</TargetFramework>-->
         <DebugSymbols>true</DebugSymbols>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 
-        <OutDir>$(ModAssemblyDirectory)</OutDir>
+        <OutDir Condition="'$(ModAssemblyDirectory)' != '' And !HasTrailingSlash('$(ModAssemblyDirectory)')">$(ModAssemblyDirectory)/</OutDir>
+        <OutDir Condition="'$(ModAssemblyDirectory)' != '' And HasTrailingSlash('$(ModAssemblyDirectory)')">$(ModAssemblyDirectory)</OutDir>
 
         <!-- Unforatuntely, we have to just ignore MSB3243 (No way to resolve
              conflict between 'X' and 'Y'.) Sucks. -->

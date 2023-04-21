@@ -24,6 +24,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet", "Void.Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.LocalPublish", "Void.Build.LocalPublish\Void.Build.LocalPublish.csproj", "{4DB82DFD-73AE-4806-8048-313C468F32D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{697722DB-F67D-4986-8442-5DE3848484DE}"
+	ProjectSection(SolutionItems) = preProject
+		shared\Void.Versions.targets = shared\Void.Versions.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
