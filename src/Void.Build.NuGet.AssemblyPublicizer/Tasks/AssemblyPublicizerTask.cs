@@ -38,6 +38,9 @@ public sealed class AssemblyPublicizerTask : VoidTask {
     public string[] AssembliesToPublicize { get; set; } = Array.Empty<string>();
 
     [Required]
+    public string GameAssemblyDirectory { get; set; } = string.Empty;
+
+    [Required]
     public string PublicizeGameAssemblies { get; set; } = string.Empty;
 
     [Required]
@@ -132,7 +135,7 @@ public sealed class AssemblyPublicizerTask : VoidTask {
             // TODO: Some system assemblies really shouldn't be publicized. lol
             var name = Path.GetFileNameWithoutExtension(assemblyPath);
 
-            if (PublicizeGameAssemblies == "enable" && !name.Contains("System") && !name.Contains("netstandard") && !name.Contains("mscorlib")) {
+            if (PublicizeGameAssemblies == "enable" && !name.Contains("System") && !name.Contains("netstandard") && !name.Contains("mscorlib") && name.StartsWith(GameAssemblyDirectory)) {
                 Log.LogMessage($"Assembly '{name}' is a game assembly; publicizing.");
                 settings = AssemblyCacheSettings.Publicized;
             }
@@ -154,7 +157,7 @@ public sealed class AssemblyPublicizerTask : VoidTask {
                         Log.LogMessage($"Assembly '{assemblyName}' is already cached and up-to-date; skipping.");
                         continue;
                     }
-                    
+
                     Log.LogMessage($"Assembly '{assemblyName}' is already cached, but the settings do not match; invalidated.");
                     cachedAssemblies.Remove(assemblyName);
                 }

@@ -44,6 +44,7 @@
             ProjectDirectory="$(MSBuildProjectDirectory)"
             AssemblyPaths="@(ReferencedAssemblies)"
             AssembliesToPublicize="@(PublicAssemblies)"
+            GameAssemblyDirectory="$(ManagedPath)"
             PublicizeGameAssemblies="$(PublicizeGameAssemblies)"
             AssemblySearchDirectories="$(ManagedPath);$(BepInExPath)/core">
             <Output TaskParameter="OutputAssemblyPaths" ItemName="_OutputAssemblyPaths"/>
