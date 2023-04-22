@@ -30,7 +30,7 @@
         <!--<Error Text="Invalid path '$(BepInExPath)' for BepInExPath; report this!" Condition="!Exists('$(BepInExPath)')" />-->
 
         <!-- Check for missing tasks. -->
-        <Error Text="Failed to import AssemblyPublicizerTask; name: '$(AssemblyPublicizerTaskName)', assembly: '$(AssemblyPublicizerTaskAssembly)'. The task name and/or assembly were not properly configured, report this!" Condition="$(AssemblyPublicizerTaskName) == '' OR $(AssemblyPublicizerTaskAssembly) == ''"/>
+        <Error Text="Failed to import AssemblyPublicizerTask; assembly: '$(AssemblyPublicizerTaskAssembly)'. The task assembly was not propertly configured, report this!" Condition="$(AssemblyPublicizerTaskAssembly) == ''"/>
     </Target>
 
 </Project>

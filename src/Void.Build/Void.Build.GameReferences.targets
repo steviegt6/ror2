@@ -30,9 +30,18 @@
 
             <!-- Remove .NET Standard assemblies. -->
             <Reference Remove="**/netstandard.library/2.0.3/build/netstandard2.0/ref/*.dll"/>
+        </ItemGroup>
 
+        <AssemblyPublicizerTask
+            ProjectDirectory="$(MSBuildProjectDirectory)"
+            AssemblyPaths="@(ReferencedAssemblies)"
+            AssemblySearchDirectories="$(ManagedPath);$(BepInExPath)/core">
+            <Output TaskParameter="OutputAssemblyPaths" ItemName="_OutputAssemblyPaths"/>
+        </AssemblyPublicizerTask>
+
+        <ItemGroup>
             <!-- Add our gathered references. -->
-            <Reference Condition="$(VoidImportReferences) == 'enable'" Include="@(ReferencedAssemblies)" Private="false"/>
+            <Reference Condition="$(VoidImportReferences) == 'enable'" Include="@(_OutputAssemblyPaths)" Private="false"/>
         </ItemGroup>
     </Target>
 

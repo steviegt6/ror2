@@ -15,6 +15,6 @@
 
 <Project>
 
-    <UsingTask TaskName="$(AssemblyPublicizerTaskName)" AssemblyFile="$(AssemblyPublicizerTaskAssembly)" Condition="$(AssemblyPublicizerTaskname) != '' AND $(AssemblyPublicizerTaskAssembly) != ''"/>
+    <UsingTask TaskName="AssemblyPublicizerTask" AssemblyFile="$(AssemblyPublicizerTaskAssembly)" Condition="$(AssemblyPublicizerTaskAssembly) != ''"/>
 
 </Project>

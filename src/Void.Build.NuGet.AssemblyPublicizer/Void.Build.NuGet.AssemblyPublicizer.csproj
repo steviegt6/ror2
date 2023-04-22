@@ -24,7 +24,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Void.Build.NuGet.Shared\Void.Build.NuGet.Shared.csproj"/>
+        <ProjectReference Include="..\Void.Build.NuGet.Shared\Void.Build.NuGet.Shared.csproj" />
     </ItemGroup>
 
 </Project>

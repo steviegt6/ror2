@@ -33,5 +33,7 @@ table_test = ""table_test""
 ";
         var model = Toml.ToModel(toml);
         Logger.LogError(Toml.FromModel(model));
+
+        _ = typeof(RoR2.UI.CurrentDifficultyIconController);
     }
 }

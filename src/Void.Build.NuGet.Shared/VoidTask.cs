@@ -17,10 +17,20 @@ using Microsoft.Build.Utilities;
 
 namespace Void.Build.NuGet.Shared;
 
+/// <summary>
+///     The context of a <see cref="VoidTask"/>.
+/// </summary>
 public sealed class VoidContext {
+    /// <summary>
+    ///     Gets or sets whether the task should catch exceptions.
+    /// </summary>
     public bool CatchOnException { get; set; } = true;
 }
 
+/// <summary>
+///     A simple abstraction over <see cref="Task"/> with rudimentary exception
+///     handling.
+/// </summary>
 public abstract class VoidTask : Task {
     public sealed override bool Execute() {
         var ctx = new VoidContext();
@@ -37,5 +47,13 @@ public abstract class VoidTask : Task {
         }
     }
 
+    /// <summary>
+    ///     Executes the task.
+    /// </summary>
+    /// <param name="ctx">The context of the task.</param>
+    /// <returns>
+    ///     <see langword="true"/> if the task succeeded, <see langword="false"/>
+    ///     otherwise.
+    /// </returns>
     protected abstract bool Execute(VoidContext ctx);
 }

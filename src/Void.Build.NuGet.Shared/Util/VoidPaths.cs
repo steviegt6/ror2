@@ -20,6 +20,8 @@ public static class VoidPaths {
     public const string VOID = ".void";
     public const string CACHE = "cache";
     public const string ASSEMBLIES = "assemblies";
+    public const string ASSEMBLIES_CACHE_DIR_MANIFEST = "assemblies.json";
 
     public static readonly string ASSEMBLY_CACHE_DIR = Path.Combine(VOID, CACHE, ASSEMBLIES);
+    public static readonly string ASSEMBLY_CACHE_MANIFEST_PATH = Path.Combine(ASSEMBLY_CACHE_DIR, ASSEMBLIES_CACHE_DIR_MANIFEST);
 }
