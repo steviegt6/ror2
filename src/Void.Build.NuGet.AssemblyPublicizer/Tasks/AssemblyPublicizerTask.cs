@@ -112,6 +112,17 @@ public sealed class AssemblyPublicizerTask : VoidTask {
 
         foreach (var assemblyPath in AssemblyPaths) {
             Log.LogMessage("Publicizing assembly: " + assemblyPath);
+            
+            // Until we support additional operations on assemblies, we can assume
+            // every assembly just wants to be publicized.
+            var settings = AssemblyCacheSettings.Publicized;
+
+            // TODO: Some system assemblies really shouldn't be publicized. lol
+            var name = Path.GetFileNameWithoutExtension(assemblyPath);
+            if (name.Contains("System") || name.Contains("netstandard") || name.Contains("mscorlib")) {
+                Log.LogMessage($"Assembly '{assemblyPath}' is a system assembly; not publicizing.");
+                settings = AssemblyCacheSettings.Unmodified;
+            }
 
             var hash = hashes[assemblyPath];
             var assemblyName = Path.GetFileNameWithoutExtension(assemblyPath);
@@ -128,10 +139,7 @@ public sealed class AssemblyPublicizerTask : VoidTask {
             else {
                 Log.LogMessage($"Assembly '{assemblyName}' is not cached.");
             }
-
-            // Until we support additional operations on assemblies, we can assume
-            // every assembly just wants to be publicized.
-            const AssemblyCacheSettings settings = AssemblyCacheSettings.Publicized;
+            
             var assemblyDefinition = AssemblyModifier.ModifyAssembly(
                 assemblyPath,
                 assemblyResolver,
