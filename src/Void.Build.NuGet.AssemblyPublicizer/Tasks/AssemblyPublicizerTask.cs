@@ -35,6 +35,12 @@ public sealed class AssemblyPublicizerTask : VoidTask {
     public string[] AssemblyPaths { get; set; } = Array.Empty<string>();
 
     [Required]
+    public string[] AssembliesToPublicize { get; set; } = Array.Empty<string>();
+
+    [Required]
+    public string PublicizeGameAssemblies { get; set; } = string.Empty;
+
+    [Required]
     public string[] AssemblySearchDirectories { get; set; } = Array.Empty<string>();
 
     [Output]
@@ -42,6 +48,12 @@ public sealed class AssemblyPublicizerTask : VoidTask {
 
     protected override bool Execute(VoidContext ctx) {
         Log.LogMessage($"Using project directory: {ProjectDirectory}");
+        Log.LogEnumerable(
+            "Using the following assemblies to publicize: ",
+            "No assemblies were specified to publicize!",
+            AssembliesToPublicize
+        );
+        Log.LogMessage($"Publicizing game assemblies: {PublicizeGameAssemblies}");
 
         var assemblyCacheDir = Path.Combine(ProjectDirectory, VoidPaths.ASSEMBLY_CACHE_DIR);
         Directory.CreateDirectory(assemblyCacheDir);
@@ -112,16 +124,25 @@ public sealed class AssemblyPublicizerTask : VoidTask {
 
         foreach (var assemblyPath in AssemblyPaths) {
             Log.LogMessage("Publicizing assembly: " + assemblyPath);
-            
+
             // Until we support additional operations on assemblies, we can assume
             // every assembly just wants to be publicized.
-            var settings = AssemblyCacheSettings.Publicized;
+            AssemblyCacheSettings settings;
 
             // TODO: Some system assemblies really shouldn't be publicized. lol
             var name = Path.GetFileNameWithoutExtension(assemblyPath);
-            if (name.Contains("System") || name.Contains("netstandard") || name.Contains("mscorlib")) {
-                Log.LogMessage($"Assembly '{assemblyPath}' is a system assembly; not publicizing.");
+
+            if (PublicizeGameAssemblies == "enable" && !name.Contains("System") && !name.Contains("netstandard") && !name.Contains("mscorlib")) {
+                Log.LogMessage($"Assembly '{name}' is a game assembly; publicizing.");
+                settings = AssemblyCacheSettings.Publicized;
+            }
+            else if (!AssembliesToPublicize.Contains(name)) {
+                Log.LogMessage($"Assembly '{name}' is not in the list of assemblies to publicize; skipping.");
                 settings = AssemblyCacheSettings.Unmodified;
+            }
+            else {
+                Log.LogMessage($"Assembly '{name}' is in the list of assemblies to publicize; publicizing.");
+                settings = AssemblyCacheSettings.Publicized;
             }
 
             var hash = hashes[assemblyPath];
@@ -129,17 +150,23 @@ public sealed class AssemblyPublicizerTask : VoidTask {
 
             if (cachedAssemblies.ContainsKey(assemblyName)) {
                 if (cachedAssemblies[assemblyName].SourceHash == hash) {
-                    Log.LogMessage($"Assembly '{assemblyName}' is already publicized and cached.");
-                    continue;
+                    if (cachedAssemblies[assemblyName].Settings == settings) {
+                        Log.LogMessage($"Assembly '{assemblyName}' is already cached and up-to-date; skipping.");
+                        continue;
+                    }
+                    
+                    Log.LogMessage($"Assembly '{assemblyName}' is already cached, but the settings do not match; invalidated.");
+                    cachedAssemblies.Remove(assemblyName);
                 }
-
-                Log.LogMessage($"Assembly '{assemblyName}' is already cached, but the source hash does not match; invalidated.");
-                cachedAssemblies.Remove(assemblyName);
+                else {
+                    Log.LogMessage($"Assembly '{assemblyName}' is already cached, but the source hash does not match; invalidated.");
+                    cachedAssemblies.Remove(assemblyName);
+                }
             }
             else {
                 Log.LogMessage($"Assembly '{assemblyName}' is not cached.");
             }
-            
+
             var assemblyDefinition = AssemblyModifier.ModifyAssembly(
                 assemblyPath,
                 assemblyResolver,

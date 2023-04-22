@@ -27,6 +27,23 @@
                                  Default: 'enable'
                                  Values: 'enable', 'disable'
 
+           VoidPublicizeAssemblies: 'enable' to allow Void.Build to publicize
+                                    local assembly references, otherwise false.
+                                    Default: 'enable'
+                                    Values: 'enable', 'disable'
+
+           PublicAssemblies: A list of assemblies to publicize if the
+                             VoidPublicizeAssemblies property is set to
+                             'enable'. This is a semicolon-separated list.
+                             Default: ''
+                             Values: any
+
+           PublicizeGameAssemblies: 'enable' to publicize all game assemblies
+                                    if the VoidPublicizeAssemblies property is
+                                    set to 'enable'.
+                                    Default: 'enable'
+                                    Values: 'enable', 'disable'
+
            VoidGameRunner: 'enable' sets StartAction, StartProgram, and 
                            StartWorkingDirectory accordingly to start the game.
                            Currently only supported on Windows, you should
@@ -81,6 +98,8 @@
 
     <PropertyGroup>
         <VoidImportReferences Condition="$(VoidImportReferences) == ''">enable</VoidImportReferences>
+        <VoidPublicizeAssemblies Condition="$(VoidPublicizeAssemblies) == ''">enable</VoidPublicizeAssemblies>
+        <PublicizeGameAssemblies Condition="$(PublicizeGameAssemblies) == ''">enable</PublicizeGameAssemblies>
         <VoidGameRunner Condition="$(VoidGameRunner) == ''">enable</VoidGameRunner>
         <VoidModManager Condition="$(VoidModManager) == ''">none</VoidModManager>
         <VoidBepInExProjectType Condition="$(VoidBepInExProjectType) == ''">plugin</VoidBepInExProjectType>
