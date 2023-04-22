@@ -26,8 +26,7 @@ sh publish.sh
   - Void.Build can automatically detect game installations and reference the
     applicable assemblies as necessary.
   - This handles boilerplate referencing, and does not pull from the BepinEx
-    NuGet repository. Unfortunately, these assemblies do not come with
-    publicized members. This is a TODO.
+    NuGet repository. Assemblies can be fully publicized.
   - MonoMod HookGen assemblies are not generated either. This is a TODO.
 - Built-in detection for building and running mods in-game.
   - The output directory is automatically inferred, meaning you can build your
