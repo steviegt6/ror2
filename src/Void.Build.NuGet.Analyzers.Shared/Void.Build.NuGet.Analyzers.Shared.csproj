@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Copyright (C) 2023 Tomat & Contributors
     
     Licensed under the GNU Lesser General Public License, version 2.1; you may
@@ -13,12 +13,14 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-<Project>
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyPublicizerTaskAssembly>Void.Build.NuGet.AssemblyPublicizer.dll</AssemblyPublicizerTaskAssembly>
-    </PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
 
-    <Import Project="Void.Build.targets"/>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
 
 </Project>

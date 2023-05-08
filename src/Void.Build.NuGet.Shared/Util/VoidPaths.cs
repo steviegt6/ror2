@@ -12,28 +12,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using BepInEx;
-using Tomlyn;
+using System.IO;
 
-namespace Void.TestMod;
+namespace Void.Build.NuGet.Shared.Util;
 
-[BepInPlugin(GUID, NAME, VERSION)]
-public class TestPlugin : BaseUnityPlugin {
-    public const string GUID = "Tomat.Void.TestMod";
-    public const string NAME = "TestMod";
-    public const string VERSION = "1.0.0";
+public static class VoidPaths {
+    public const string VOID = ".void";
+    public const string CACHE = "cache";
+    public const string ASSEMBLIES = "assemblies";
+    public const string ASSEMBLIES_CACHE_DIR_MANIFEST = "assemblies.json";
 
-    private void Awake() {
-        Logger.LogInfo("Hello, world!");
-
-        const string toml = @"
-test = ""test""
-[table]
-table_test = ""table_test""
-";
-        var model = Toml.ToModel(toml);
-        Logger.LogError(Toml.FromModel(model));
-
-        _ = typeof(RoR2.UI.CurrentDifficultyIconController);
-    }
+    public static readonly string ASSEMBLY_CACHE_DIR = Path.Combine(VOID, CACHE, ASSEMBLIES);
+    public static readonly string ASSEMBLY_CACHE_MANIFEST_PATH = Path.Combine(ASSEMBLY_CACHE_DIR, ASSEMBLIES_CACHE_DIR_MANIFEST);
 }

@@ -18,6 +18,8 @@
     <Target Name="DisplayErrors" BeforeTargets="Build">
         <!-- Check for invalid configuration options. -->
         <Error Text="Invalid option '$(VoidImportReferences)' for VoidImportReferences; must be 'enable', 'disable'" Condition="$(VoidImportReferences) != 'enable' AND $(VoidImportReferences) != 'disable'"/>
+        <Error Text="Invalid option '$(VoidPublicizeAssemblies)' for VoidPublicizeAssemblies; must be 'enable', 'disable'" Condition="$(VoidPublicizeAssemblies) != 'enable' AND $(VoidPublicizeAssemblies) != 'disable'"/>
+        <Error Text="Invalid option '$(PublicizeGameAssemblies)' for PublicizeGameAssemblies; must be 'enable', 'disable'" Condition="$(PublicizeGameAssemblies) != 'enable' AND $(PublicizeGameAssemblies) != 'disable'"/>
         <Error Text="Invalid option '$(VoidGameRunner)' for VoidGameRunner; must be 'enable', 'disable'" Condition="$(VoidGameRunner) != 'enable' AND $(VoidGameRunner) != 'disable'"/>
         <Error Text="Invalid option '$(VoidBepInExProjectType)' for VoidBepInExProjectType; must be 'plugin', 'patcher'" Condition="$(VoidBepInExProjectType) != 'plugin' AND $(VoidBepInExProjectType) != 'patcher'"/>
         <Error Text="Invalid option '$(VoidModManager)' for VoidModManager; must be 'none', 'r2modman'" Condition="$(VoidModManager) != 'none' AND $(VoidModManager) != 'r2modman'"/>
@@ -28,6 +30,9 @@
         <Error Text="BepInExPath not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(BepInExPath) == ''"/>
         <Error Text="ModAssemblyDirectory not set, is your platform unsupported? If so -- contribute! We need paths!" Condition="$(ModAssemblyDirectory) == ''"/>
         <!--<Error Text="Invalid path '$(BepInExPath)' for BepInExPath; report this!" Condition="!Exists('$(BepInExPath)')" />-->
+
+        <!-- Check for missing tasks. -->
+        <Error Text="Failed to import AssemblyPublicizerTask; assembly: '$(AssemblyPublicizerTaskAssembly)'. The task assembly was not propertly configured, report this!" Condition="$(AssemblyPublicizerTaskAssembly) == ''"/>
     </Target>
 
 </Project>

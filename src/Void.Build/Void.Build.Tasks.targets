@@ -15,10 +15,6 @@
 
 <Project>
 
-    <PropertyGroup>
-        <AssemblyPublicizerTaskAssembly>Void.Build.NuGet.AssemblyPublicizer.dll</AssemblyPublicizerTaskAssembly>
-    </PropertyGroup>
-
-    <Import Project="Void.Build.targets"/>
+    <UsingTask TaskName="AssemblyPublicizerTask" AssemblyFile="$(AssemblyPublicizerTaskAssembly)" Condition="$(AssemblyPublicizerTaskAssembly) != ''"/>
 
 </Project>

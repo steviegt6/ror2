@@ -15,7 +15,7 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="../shared/Void.Versions.targets" />
+    <Import Project="../shared/Void.Versions.targets"/>
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -51,10 +51,48 @@
 
     <ItemGroup>
         <!-- Include Void.Build. -->
-        <None PackagePath="build/" Include="../Void.Build/*" Link="build/*" Pack="true" />
-        
+        <None PackagePath="build/" Include="../Void.Build/*" Link="build/*" Pack="true"/>
+
         <!-- Include our entrypoint so we can import Void.Build -->
-        <None PackagePath="build/" Include="build\Tomat.Void.Build.NuGet.targets" Pack="true" />
+        <None PackagePath="build/" Include="build/Tomat.Void.Build.NuGet.targets" Pack="true"/>
+
+        <!-- Include our .deps.json file for good measure. -->
+        <None PackagePath="build/" Include="$(OutputPath)/Void.Build.NuGet.deps.json" Pack="true" Visible="false"/>
+
+        <!-- Include .dll and .pdb files from the Void.Build.NuGet.Shared project. -->
+        <SharedFiles Include="../Void.Build.NuGet.Shared/bin/$(Configuration)/$(TargetFramework)/*.dll"/>
+        <SharedFiles Include="../Void.Build.NuGet.Shared/bin/$(Configuration)/$(TargetFramework)/*.pdb"/>
+
+        <!-- Include .dll and .pdb files from the Void.Build.NuGet.AssemblyPublicizer project. -->
+        <AssemblyPublicizerFiles Include="../Void.Build.NuGet.AssemblyPublicizer/bin/$(Configuration)/$(TargetFramework)/*.dll"/>
+        <AssemblyPublicizerFiles Include="../Void.Build.NuGet.AssemblyPublicizer/bin/$(Configuration)/$(TargetFramework)/*.pdb"/>
+
+        <!-- Combine the two lists. -->
+        <AllFiles Include="@(VoidBuildNuGetSharedFiles);@(AssemblyPublicizerFiles)"/>
+
+        <!-- Filter. -->
+        <UniqueFiles Include="@(AllFiles)" Exclude="@(AllFiles->'%(Filename)%(Extension)')"/>
+
+        <!-- Add filtered DependencyFiles to the package. -->
+        <None PackagePath="build/" Include="@(UniqueFiles)" Pack="true" Visible="false"/>
+        
+        <!-- Practically the same thing but for analyzers. -->
+        <AnalyzersSharedFiles Include="../Void.Build.NuGet.Analyzers.Shared/bin/$(Configuration)/$(TargetFramework)/*.dll"/>
+        <AnalyzersSharedFiles Include="../Void.Build.NuGet.Analyzers.Shared/bin/$(Configuration)/$(TargetFramework)/*.pdb"/>
+        
+        <AllAnalyzerFiles Include="@(AnalyzersSharedFiles)"/>
+        
+        <!-- TODO: Exclude extra assemblies we don't actually need. lol -->
+        <!-- (Workspaces and stuff are provided by the MSBuild SDK) -->
+        
+        <UniqueAnalyzerFiles Include="@(AllAnalyzerFiles)" Exclude="@(AllAnalyzerFiles->'%(Filename)%(Extension)')"/>
+        
+        <None PackagePath="analyzers/dotnet/cs" Include="@(UniqueAnalyzerFiles)" Pack="true" Visible="false"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Void.Build.NuGet.Shared\Void.Build.NuGet.Shared.csproj" PrivateAssets="all"/>
+        <ProjectReference Include="..\Void.Build.NuGet.AssemblyPublicizer\Void.Build.NuGet.AssemblyPublicizer.csproj" PrivateAssets="all"/>
     </ItemGroup>
 
 </Project>
