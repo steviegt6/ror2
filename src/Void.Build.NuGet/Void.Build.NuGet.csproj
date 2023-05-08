@@ -75,6 +75,19 @@
 
         <!-- Add filtered DependencyFiles to the package. -->
         <None PackagePath="build/" Include="@(UniqueFiles)" Pack="true" Visible="false"/>
+        
+        <!-- Practically the same thing but for analyzers. -->
+        <AnalyzersSharedFiles Include="../Void.Build.NuGet.Analyzers.Shared/bin/$(Configuration)/$(TargetFramework)/*.dll"/>
+        <AnalyzersSharedFiles Include="../Void.Build.NuGet.Analyzers.Shared/bin/$(Configuration)/$(TargetFramework)/*.pdb"/>
+        
+        <AllAnalyzerFiles Include="@(AnalyzersSharedFiles)"/>
+        
+        <!-- TODO: Exclude extra assemblies we don't actually need. lol -->
+        <!-- (Workspaces and stuff are provided by the MSBuild SDK) -->
+        
+        <UniqueAnalyzerFiles Include="@(AllAnalyzerFiles)" Exclude="@(AllAnalyzerFiles->'%(Filename)%(Extension)')"/>
+        
+        <None PackagePath="analyzers/dotnet/cs" Include="@(UniqueAnalyzerFiles)" Pack="true" Visible="false"/>
     </ItemGroup>
 
     <ItemGroup>

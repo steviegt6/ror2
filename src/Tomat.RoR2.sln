@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.Shared", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.AssemblyPublicizer", "Void.Build.NuGet.AssemblyPublicizer\Void.Build.NuGet.AssemblyPublicizer.csproj", "{45A81101-7544-4E0D-81A4-9CE5C8E13359}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.Analyzers.Generator", "Void.Build.NuGet.Analyzers.Generator\Void.Build.NuGet.Analyzers.Generator.csproj", "{0FD41704-7A07-4684-9B91-0D52C40DAFD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Void.Build.NuGet.Analyzers.Shared", "Void.Build.NuGet.Analyzers.Shared\Void.Build.NuGet.Analyzers.Shared.csproj", "{324A3A04-CF19-4036-A17D-B0EE437218BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +70,13 @@ Global
 		{45A81101-7544-4E0D-81A4-9CE5C8E13359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45A81101-7544-4E0D-81A4-9CE5C8E13359}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45A81101-7544-4E0D-81A4-9CE5C8E13359}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD41704-7A07-4684-9B91-0D52C40DAFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FD41704-7A07-4684-9B91-0D52C40DAFD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FD41704-7A07-4684-9B91-0D52C40DAFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FD41704-7A07-4684-9B91-0D52C40DAFD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{324A3A04-CF19-4036-A17D-B0EE437218BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324A3A04-CF19-4036-A17D-B0EE437218BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324A3A04-CF19-4036-A17D-B0EE437218BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324A3A04-CF19-4036-A17D-B0EE437218BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
